@@ -1,11 +1,27 @@
-### Statikus analízis
+# Statikus analízis
 
-sonarlint segítségével
+## SonarLint VS Code-ban
 
 Először a gyökérkönyvtárban található url.js-en néztük meg a SonarLint eredményét:
 ![](img/sonar1.png)
 
 Mindkét jelzett problémával egyetértettünk, ezért kijavítottuk.
+
+## SonarQube
+
+Ahhoz, hogy lokálisan sikerüljön statikusan megvizsgálni a kódot, ahhoz a SonarQube-ot választottuk. Ehhez először leszedtem a megfelelő docker image-t, beállítottam a megfelelő konfigurációkat, telepítettem a szükséges dolgokat, majd a localhost:9000-es portján sikerült elindítom. A projekt létrehozása után a lokális könyvtárban kellett futtatni az analízist: 
+
+```bash
+sonar-scanner.bat -D"sonar.projectKey=iet-hf2021-heekk" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=${TOKEN_KEY}"
+```
+
+És meg is jelent az analízis:
+
+![](img/sonarqube.png)
+
+A hibák száma azonban ennél valójában kevesebb, mert a feladat megismeréséhez írt demo kódokat is belevette.
+
+
 
 ### Manuális kód átvizsgálás
 
