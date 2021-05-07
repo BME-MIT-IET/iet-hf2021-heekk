@@ -435,9 +435,9 @@
             (this.user && (
                 encode(this.user) + (this.pass && (':' + encode(this.pass))
             ) + '@')) +
-            (this.host && this.host) +
+            (this.host) +
             (this.port && (':' + this.port)) +
-            (this.path && this.path) +
+            (this.path) +
             (this.query.toString() && ('?' + this.query)) +
             (this.hash && ('#' + encode(this.hash)))
         );
