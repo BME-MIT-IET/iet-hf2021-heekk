@@ -5,7 +5,7 @@
 Először a gyökérkönyvtárban található url.js-en néztük meg a SonarLint eredményét:
 ![](img/sonar1.png)
 
-Mindkét jelzett problémával egyetértettünk, ezért kijavítottuk.
+Mindkét jelzett problémával egyetértettünk.
 
 ## SonarQube
 
@@ -20,6 +20,16 @@ sonar-scanner.bat -D"sonar.projectKey=iet-hf2021-heekk" -D"sonar.sources=." -D"s
 ![](img/sonarqube.png)
 
 A hibák száma azonban ennél valójában kevesebb, mert a feladat megismeréséhez írt demo kódokat is belevette.
+
+A korábban talált bugokat itt is megtalálta, és mellé megjelentek egy új az url.js fájlnál:
+
+![](img/sonarqube_url.png)
+
+Az összes hibával egyetértettem, ezért kijavítottam őket.
+
+És egy code smell is:
+
+![](img/sonarqube_url_codesmell.png)
 
 
 
