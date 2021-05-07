@@ -21,9 +21,11 @@
   "main": "url.min.js",
   "scripts": {
     "test": "mocha ./test --recursive",
+    "test-original": "mocha ./test/url.js --recursive",
+    "coverage-original": "nyc npm run test-original",
     "minify": "./node_modules/uglify-js/bin/uglifyjs url.js --output url.min.js --compress --mangle",
     "coverage": "nyc npm run test",
-    "report" : "nyc report --reporter=lcov --reporter=html"
+    "report": "nyc report --reporter=lcov --reporter=html"
   },
   "maintainers": [
     {
