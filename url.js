@@ -116,14 +116,8 @@ function getCurrUrl() {
 function parse (self, url, absolutize) {
     var link, i, auth;
 
-    if (!url) {
-        url = getCurrUrl();
-    }
-
-    if (isNode) {
-        link = nodeRequire('url').parse(url);
-    }
-
+    if (!url)  url = getCurrUrl();
+    if (isNode) link = nodeRequire('url').parse(url);
     else {
         link = document.createElement('a');
         link.href = url;
@@ -134,11 +128,8 @@ function parse (self, url, absolutize) {
     auth = url.match(RX_CREDS) || [];
 
     for (i in map) {
-        if (config[i]) {
-            self[i] = link[map[i]] || '';
-        } else {
-            self[i] = '';
-        }
+        if (config[i]) self[i] = link[map[i]] || '';
+        else self[i] = '';
     }
 
     // fix-up some parts
@@ -154,42 +145,43 @@ function parse (self, url, absolutize) {
     ) ? '' : self.port; // IE fix, Android browser fix
     /* jshint ignore:end */
 
-    if (!config.protocol && RX_URL_TEST.test(url.charAt(0))) {
+    if (!config.protocol && RX_URL_TEST.test(url.charAt(0)))
         self.path = url.split('?')[0].split('#')[0];
-    }
 
-    if (!config.protocol && absolutize) {
-        // is IE and path is relative
-        var base = new Url(getCurrUrl().match(RX_PATH)[0]);
-        var basePath = base.path.split('/');
-        var selfPath = self.path.split('/');
-        var props = ['protocol', 'user', 'pass', 'host', 'port'];
-        var s = props.length;
-
-        basePath.pop();
-
-        for (i = 0; i < s; i++) {
-            self[props[i]] = base[props[i]];
-        }
-
-        while (selfPath[0] === '..') { // skip all "../
-            basePath.pop();
-            selfPath.shift();
-        }
-
-        self.path =
-            (url.charAt(0) !== '/' ? basePath.join('/') : '') +
-            '/' + selfPath.join('/')
-        ;
-    }
-
-    self.path = self.path.replace(RX_PATH_FIX, '/');
-    isIe && (self.path = self.path.replace(RX_PATH_IE_FIX, '/'));
+    self.path = updatePath(self, config.protocol, absolutize)
 
     self.paths(self.paths());
 
     self.query = new QueryString(self.query);
 }
+
+function updatePath(self, protocol, absolutize) {
+    if (!protocol && absolutize) { // if it's IE and path is relative
+            
+        var base = new Url(getCurrUrl().match(RX_PATH)[0]);
+        var basePath = base.path.split("/");
+        var selfPath = self.path.split("/");
+        var props = ["protocol", "user", "pass", "host", "port"];
+        var s = props.length;
+
+        basePath.pop();
+
+        for (let i = 0; i < s; i++) self[props[i]] = base[props[i]];
+
+        while (selfPath[0] === "..") {
+            // skip all "../
+            basePath.pop();
+            selfPath.shift();
+        }
+        self.path = (url.charAt(0) !== "/" ? basePath.join("/") : "") + "/" + selfPath.join("/");
+    }
+
+    self.path = self.path.replace(RX_PATH_FIX, "/");
+    isIe && (self.path = self.path.replace(RX_PATH_IE_FIX, "/"));
+
+    return self.path;
+}
+
 
 function encode (s) {
     return encodeURIComponent(s).replace(RX_SINGLE_QUOTE, '%27');
