@@ -269,26 +269,26 @@ QueryString.prototype.toString = function() {
     for (let i in this) {
         var param = this[i];
 
-        if (!(param instanceof Function) && param !== undefined) {
-            if (param instanceof Array) {
-                if (!param.length) {
-                    // Parameter is an empty array, so treat as
-                    // an empty argument
-                    toBuild = updateParams(toBuild, i, "");
-                } else 
-                    for (let j = 0; j < param.length; j++) {
-                        if (param[j] !== undefined) toBuild = updateParams(toBuild, i, param[j]);
-                    
-                }
-            } else {
-                // Plain value
-                toBuild = updateParams(toBuild, i, param);
-            }
-        }
+        if (param instanceof Array) toBuild = buildArrayParam(toBuild, i, param);
+        else if (!(param instanceof Function) && param !== undefined)
+            toBuild = updateParams(toBuild, i, param); // Plain value
     }
 
     return toBuild;
 };
+
+function buildArrayParam(toBuild, key, param) {
+    if (!param.length)
+        // Parameter is an empty array, so treat as
+        // an empty argument
+        toBuild = updateParams(toBuild, key, "");
+    else
+        for (let j = 0; j < param.length; j++)
+            if (param[j] !== undefined) toBuild = updateParams(toBuild, key, param[j]);
+
+    return toBuild;
+}
+
 
 function updateParams(str, key, value) {
     str += str ? "&" : "";
