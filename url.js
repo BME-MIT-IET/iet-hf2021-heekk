@@ -283,8 +283,8 @@ function buildArrayParam(toBuild, key, param) {
         // an empty argument
         toBuild = updateParams(toBuild, key, "");
     else
-        for (let j = 0; j < param.length; j++)
-            if (param[j] !== undefined) toBuild = updateParams(toBuild, key, param[j]);
+        for (let p of param)
+            if (p !== undefined) toBuild = updateParams(toBuild, key, p);
 
     return toBuild;
 }
@@ -359,7 +359,7 @@ Url.prototype.paths = function(paths) {
     var i = 0;
     var s;
 
-    if (paths && paths.length && paths + "" !== paths) {
+    if (paths && paths.length && paths + "" != paths) {
         if (this.isAbsolute()) {
             prefix = "/";
         }
