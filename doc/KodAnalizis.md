@@ -9,7 +9,7 @@ Mindkét jelzett problémával egyetértettünk.
 
 ## SonarQube
 
-Ahhoz, hogy lokálisan sikerüljön statikusan megvizsgálni a kódot, ahhoz a SonarQube-ot választottuk. Ehhez először leszedtem a megfelelő docker image-t, beállítottam a megfelelő konfigurációkat, telepítettem a szükséges dolgokat, majd a localhost:9000-es portján sikerült elindítom. A projekt létrehozása után a lokális könyvtárban kellett futtatni az analízist: 
+Ahhoz, hogy lokálisan sikerüljön statikusan megvizsgálni a kódot, ahhoz a SonarQube-ot választottuk. Ehhez először leszedtük a megfelelő docker image-t, beállítottuk a megfelelő konfigurációkat, telepítettük a szükséges dolgokat, majd a localhost:9000-es portján sikerült elindítani. A projekt létrehozása után a lokális könyvtárban kellett futtatni az analízist: 
 
 ```bash
 sonar-scanner.bat -D"sonar.projectKey=iet-hf2021-heekk" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=${TOKEN_KEY}"
@@ -25,11 +25,13 @@ A korábban talált bugokat itt is megtalálta, és mellé megjelentek egy új a
 
 ![](img/sonarqube_url.png)
 
-Az összes hibával egyetértettem, ezért kijavítottam őket.
+Az összes hibával egyetértettem, ezért kijavítottuk őket.
 
 És egy code smell is:
 
 ![](img/sonarqube_url_codesmell.png)
+
+
 
 
 
