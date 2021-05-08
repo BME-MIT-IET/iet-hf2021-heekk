@@ -10,10 +10,11 @@ Mindkét jelzett problémával egyetértettünk.
 ## SonarQube
 
 <<<<<<< HEAD
-Ahhoz, hogy lokálisan sikerüljön statikusan megvizsgálni a kódot, ahhoz a SonarQube-ot választottuk. Ehhez először leszedtük a megfelelő docker image-t, beállítottuk a megfelelő konfigurációkat, telepítettük a szükséges dolgokat, majd a localhost:9000-es portján sikerült elindítani. A projekt létrehozása után a lokális könyvtárban kellett futtatni az analízist: 
+Ahhoz, hogy lokálisan sikerüljön statikusan megvizsgálni a kódot, ahhoz a SonarQube-ot választottuk. Ehhez először leszedtük a megfelelő docker image-t, beállítottuk a megfelelő konfigurációkat, telepítettük a szükséges dolgokat, majd a localhost:9000-es portján sikerült elindítani. A projekt létrehozása után a lokális könyvtárban kellett futtatni az analízist:
 =======
 Ahhoz, hogy lokálisan sikerüljön statikusan megvizsgálni a kódot, ahhoz a SonarQube-ot választottuk. Ehhez először leszedtem a megfelelő docker image-t, beállítottam a megfelelő konfigurációkat, telepítettem a szükséges dolgokat, majd a localhost:9000-es portján sikerült elindítom. A projekt létrehozása után a lokális könyvtárban kellett futtatni az analízist:
->>>>>>> a327c1f569af392662c0be77a289ced02c38318d
+
+> > > > > > > a327c1f569af392662c0be77a289ced02c38318d
 
 ```bash
 sonar-scanner.bat -D"sonar.projectKey=iet-hf2021-heekk" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=${TOKEN_KEY}"
@@ -37,11 +38,10 @@ Az összes hibával egyetértettem, ezért kijavítottuk őket.
 
 <<<<<<< HEAD
 
-
-
-
 =======
->>>>>>> a327c1f569af392662c0be77a289ced02c38318d
+
+> > > > > > > a327c1f569af392662c0be77a289ced02c38318d
+
 ### Manuális kód átvizsgálás
 
 Ennek a feladatnak az elvégzéséhez készítettünk egy strukturált ellenőrző listát.
