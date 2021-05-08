@@ -1,6 +1,46 @@
+# Statikus analízis
 
-### Statikus analízis
-sonarlint segítségével
+## SonarLint VS Code-ban
+
+Először a gyökérkönyvtárban található url.js-en néztük meg a SonarLint eredményét: ![img](file://C:\Work\codes\iet\iet-hf2021-heekk\doc\img\sonar1.png?lastModify=1620507217)
+
+Mindkét jelzett problémával egyetértettünk.
+
+## SonarQube
+
+Ahhoz, hogy lokálisan sikerüljön statikusan megvizsgálni a kódot, ahhoz a SonarQube-ot választottuk. Ehhez először leszedtem a megfelelő docker image-t, beállítottam a megfelelő konfigurációkat, telepítettem a szükséges dolgokat, majd a localhost:9000-es portján sikerült elindítom. A projekt létrehozása után a lokális könyvtárban kellett futtatni az analízist: 
+
+```bash
+sonar-scanner.bat -D"sonar.projectKey=iet-hf2021-heekk" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=${TOKEN_KEY}"
+```
+
+És meg is jelent az analízis:
+
+![img](file://C:\Work\codes\iet\iet-hf2021-heekk\doc\img\sonarqube.png?lastModify=1620507217)
+
+A hibák száma azonban ennél valójában kevesebb, mert a feladat megismeréséhez írt demo kódokat is belevette.
+
+A korábban talált bugokat itt is megtalálta, és mellé megjelentek egy új az url.js fájlnál:
+
+![img](file://C:\Work\codes\iet\iet-hf2021-heekk\doc\img\sonarqube_url.png?lastModify=1620507217)
+
+Az összes hibával egyetértettem, ezért kijavítottam őket.
+
+És egy code smell is:
+
+![img](file://C:\Work\codes\iet\iet-hf2021-heekk\doc\img\sonarqube_url_codesmell.png?lastModify=1620507217)
+
+A fájlban egy anonim főfüggvény van definiálva és rögtön meg is hívva. Ezt átalakítottam, de ezután is jelzett code smellt: 
+
+![img](file://C:\Work\codes\iet\iet-hf2021-heekk\doc\img\sonarqube_url_codesmell2.png?lastModify=1620507217)
+
+Habár a Code Smell-ek számából több lett, a Technical Debt 2.5 óráról 40 percre csökkent.
+
+Miközben ezeket javítottam folyamatosan jöttek újabb Code Smellek is, viszont ezek már kisebbek, például:
+
+![image-20210508203809946](file://C:\Users\Reni\AppData\Roaming\Typora\typora-user-images\image-20210508203809946.png?lastModify=1620507217)
+
+Végül egyetlen TODO komment maradt egy nagyobb issue-ra hivatkozva, a többi hibát mind sikerült kijavítani.
 
 ### Manuális kód átvizsgálás
 
