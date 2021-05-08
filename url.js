@@ -169,8 +169,8 @@ function updatePath(self, protocol, absolutize, url) {
 
         basePath.pop();
 
-        for (let i = 0; i < props.length; i++) {
-            self[props[i]] = base[props[i]];
+        for (let p of props) {
+            self[p] = base[p];
         }
 
         while (selfPath[0] === "..") {
@@ -264,45 +264,37 @@ function QueryString(qs) {
  * @returns {string}
  */
 QueryString.prototype.toString = function() {
-    var s = "";
-    var e = encode;
-    var i, ii;
+    var toBuild = "";
 
-    for (i in this) {
-        var w = this[i];
+    for (let i in this) {
+        var param = this[i];
 
-        if (w instanceof Function || w === undefined) {
-            continue;
-        }
-
-        if (w instanceof Array) {
-            var len = w.length;
-
-            if (!len) {
-                // Parameter is an empty array, so treat as
-                // an empty argument
-                s += (s ? "&" : "") + e(i) + "=";
-                continue;
-            }
-
-            for (ii = 0; ii < len; ii++) {
-                var v = w[ii];
-                if (v === undefined) {
-                    continue;
+        if (!(param instanceof Function) && param !== undefined) {
+            if (param instanceof Array) {
+                if (!param.length) {
+                    // Parameter is an empty array, so treat as
+                    // an empty argument
+                    toBuild = updateParams(toBuild, i, "");
+                } else 
+                    for (let j = 0; j < param.length; j++) {
+                        if (param[j] !== undefined) toBuild = updateParams(toBuild, i, param[j]);
+                    
                 }
-                s += s ? "&" : "";
-                s += e(i) + (v === null ? "" : "=" + e(v));
+            } else {
+                // Plain value
+                toBuild = updateParams(toBuild, i, param);
             }
-            continue;
         }
-
-        // Plain value
-        s += s ? "&" : "";
-        s += e(i) + (w === null ? "" : "=" + e(w));
     }
 
-    return s;
+    return toBuild;
 };
+
+function updateParams(str, key, value) {
+    str += str ? "&" : "";
+    str += encode(key) + (value === null ? "" : "=" + encode(value));
+    return str;
+}
 
 /**
  * Class Url
@@ -425,9 +417,9 @@ Url.prototype.toString = function() {
     return (
         (this.protocol && this.protocol + "://") +
         (this.user && encode(this.user) + (this.pass && ":" + encode(this.pass)) + "@") +
-        (this.host && this.host) +
+        (this.host) +
         (this.port && ":" + this.port) +
-        (this.path && this.path) +
+        (this.path) +
         (this.query.toString() && "?" + this.query) +
         (this.hash && "#" + encode(this.hash))
     );
