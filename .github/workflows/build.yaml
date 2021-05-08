@@ -24,8 +24,6 @@ jobs:
           dry: True
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: npm run format
-      - run: npm run minify
 
   build:
     runs-on: ubuntu-latest
