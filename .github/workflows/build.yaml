@@ -6,7 +6,7 @@ on:
       - "**"
 
 jobs:
-  prettier:
+  format:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +16,7 @@ jobs:
           # Make sure the actual branch is checked out when running on pull requests
           ref: ${{ github.head_ref }}
 
-      - name: Prettify code
+      - name: Prettier
         uses: creyD/prettier_action@v3.1
         with:
           # This part is also where you can pass other options, for example:
@@ -24,6 +24,8 @@ jobs:
           dry: True
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm run format
+      - run: npm run minify
 
   build:
     runs-on: ubuntu-latest
