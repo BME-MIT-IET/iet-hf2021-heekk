@@ -14,13 +14,14 @@ A következő feladatokat szeretnénk elvégezni:
 ## Technológiai fókusz
 
 ### Statikus analízis
+
 sonarlint segítségével
 
 ### Manuális kód átvizsgálás
 
 Ennek a feladatnak az elvégzéséhez készítettünk egy strukturált ellenőrző listát.
 
-### Egységtesztek készítése/kiegészítése 
+### Egységtesztek készítése/kiegészítése
 
 Mocha teszt keretrendszer
 Chai assertion library
