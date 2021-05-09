@@ -2,7 +2,6 @@ const assert = require('assert');
 const { Given, When, Then } = require('@cucumber/cucumber');
 const Url = require('../../url');
 
-//Path is /
 Given('path is {string}', function (path) {
     this.url = new Url(path);
 });
