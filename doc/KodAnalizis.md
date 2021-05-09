@@ -3,7 +3,7 @@
 ## SonarLint VS Code-ban
 
 Először a gyökérkönyvtárban található url.js-en néztük meg a SonarLint eredményét:
-![](img/sonar1.png)
+![](img/analysis/sonar1.png)
 
 Mindkét jelzett problémával egyetértettünk.
 
@@ -17,19 +17,33 @@ sonar-scanner.bat -D"sonar.projectKey=iet-hf2021-heekk" -D"sonar.sources=." -D"s
 
 És meg is jelent az analízis:
 
-![](img/sonarqube.png)
+![](img/analysis/sonarqube.png)
 
-A hibák száma azonban ennél valójában kevesebb, mert a feladat megismeréséhez írt demo kódokat is belevette.
+A hibák száma azonban ennél valójában kevesebb, mert a feladat megismeréséhez írt demo kódokat is belevette. Később rájöttünk, hogy ezt a `-Dsonar.exclusions=**/demo/**/*˙` opcióval kitudjuk küszöbölni, így már fele annyi bug jelent meg.
 
 A korábban talált bugokat itt is megtalálta, és mellé megjelentek egy új az url.js fájlnál:
 
-![](img/sonarqube_url.png)
+![](img/analysis/sonarqube_url.png)
 
 Az összes hibával egyetértettem, ezért kijavítottam őket.
 
 És egy code smell is:
 
-![](img/sonarqube_url_codesmell.png)
+![](img/analysis/sonarqube_url_codesmell.png)
+
+A fájlban egy anonim főfüggvény van definiálva és rögtön meg is hívva. Ezt átalakítottam, de ezután is jelzett code smellt: 
+
+![](img/analysis/sonarqube_url_codesmell2.png)
+
+Habár a Code Smell-ek számából több lett, a Technical Debt 2.5 óráról 40 percre csökkent.
+
+Miközben ezeket javítottam folyamatosan jöttek újabb Code Smellek is, viszont ezek már kisebbek, például:
+
+![](img/analysis/sonarqube_url_codesmell3.png)
+
+Végül egyetlen TODO komment maradt egy nagyobb issue-ra hivatkozva, a többi hibát mind sikerült kijavítani:
+
+![](img/analysis/sonarqube_result.png)
 
 
 
