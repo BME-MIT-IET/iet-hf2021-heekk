@@ -22,7 +22,7 @@
   "scripts": {
     "test": "mocha ./test/url.js",
     "minify": "./node_modules/uglify-js/bin/uglifyjs url.js --output url.min.js --compress --mangle",
-    "bdd_test" : "./node_modules/.bin/cucumber-js --publish"
+    "bdd_test": "cucumber-js --publish"
   },
   "maintainers": [
     {
