@@ -7,8 +7,7 @@ const addParam = () => {
 	location.href = url;
 };
 
-
-const clear = () => {
+const clearParams = () => {
 	location.href = url.clearQuery();
 };
 
