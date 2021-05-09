@@ -4,7 +4,7 @@ Feature: Query modifications
   Scenario Outline: Query
     Given query is "<input_url>" 
     When query set to "<query_name>", "<query_value>"
-    Then I should be told "<url>"
+    Then the new url with query should be "<url>"
 
   Examples:
    | input_url                    | query_name      | query_value |  url                            |

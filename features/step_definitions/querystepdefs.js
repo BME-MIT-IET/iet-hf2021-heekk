@@ -11,6 +11,6 @@ When('query set to {string}, {string}', function (query_name, query_value) {
     this.url.query[query_name] = JSON.parse(query_value);
 });
 
-Then('I should be told {string}', function (url) {
+Then('the new url with query should be {string}', function (url) {
     assert.strictEqual(this.url.toString(), url);
 });

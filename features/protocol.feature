@@ -4,7 +4,7 @@ Feature: Protocol modifications
   Scenario Outline: Protocol
     Given url is "<input_url>" 
     When protocol set to "<protocol>"
-    Then I should be told "<url>"
+    Then it should be "<url>"
 
   Examples:
    | input_url                    | protocol      |  url               |
