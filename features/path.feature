@@ -7,7 +7,7 @@ Feature: Path modifications
     Then new url should be "<url>"
 
   Examples:
-   | input_url                    | path                |  url                                  |
+   |  input_url                   | path                | url                                   |
    |  http://google.com           | /newpath            | http://google.com/newpath             |
    |  http://google.com           | /newpath/anotherone | http://google.com/newpath/anotherone  |
-   |  http://google.com/asd       | /                   | http://google.com/                 | 
+   |  http://google.com/asd       | /                   | http://google.com/                    | 

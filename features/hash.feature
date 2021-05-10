@@ -9,5 +9,5 @@ Feature: Hash modifications
   Examples:
    | input_url                     | hash | url                                |
    | http://google.com             | alma | http://google.com/#alma            |
-   | http://google.com/asd         | alma | http://google.com/asd#alma        |
-   | http://google.com/asdasd?a=2  | alma | http://google.com/asdasd?a=2#alma | 
+   | http://google.com/asd         | alma | http://google.com/asd#alma         |
+   | http://google.com/asdasd?a=2  | alma | http://google.com/asdasd?a=2#alma  | 

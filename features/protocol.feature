@@ -7,7 +7,7 @@ Feature: Protocol modifications
     Then it should be "<url>"
 
   Examples:
-   | input_url                    | protocol      |  url               |
-   |  http://google.com           | https         | https://google.com/|
-   |  http://google.com           | ftp           | ftp://google.com/  |
-   |  http://google.com           | file          | file://google.com/ | 
+   |  input_url                   | protocol      | url                   |
+   |  http://google.com           | https         | https://google.com/   |
+   |  http://google.com           | ftp           | ftp://google.com/     |
+   |  http://google.com           | file          | file://google.com/    | 

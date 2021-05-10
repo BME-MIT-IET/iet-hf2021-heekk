@@ -7,7 +7,7 @@ Feature: Query modifications
     Then the new url with query should be "<url>"
 
   Examples:
-   | input_url                    | query_name      | query_value |  url                            |
-   |  http://google.com           | a               | 1           | http://google.com/?a=1          |
-   |  http://google.com?a=1       | b               | 2           | http://google.com/?a=1&b=2      |
+   |  input_url                   | query_name      | query_value |  url                            |
+   |  http://google.com           | a               | 1           |  http://google.com/?a=1         |
+   |  http://google.com?a=1       | b               | 2           |  http://google.com/?a=1&b=2     |
    |  http://google.com           | c               | [1,2,3]     |  http://google.com/?c=1&c=2&c=3 | 
