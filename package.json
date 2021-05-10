@@ -20,10 +20,11 @@
   },
   "main": "url.min.js",
   "scripts": {
-    "test": "mocha ./test --recursive",
-    "test-original": "mocha ./test/url.js --recursive",
-    "coverage-original": "nyc npm run test-original",
     "minify": "./node_modules/uglify-js/bin/uglifyjs url.js --output url.min.js --compress --mangle",
+    "bdd_test": "cucumber-js --publish",
+    "test": "mocha ./test --recursive",
+    "test-original": "mocha ./test/url.js",
+    "coverage-original": "nyc npm run test-original",
     "coverage": "nyc npm run test",
     "report": "nyc report --reporter=lcov --reporter=html"
   },
@@ -43,6 +44,7 @@
   },
   "github": "https://github.com/Mikhus/domurl",
   "devDependencies": {
+    "@cucumber/cucumber": "^7.2.1",
     "chai": "^4.3.4",
     "istanbul": "^0.4.5",
     "jscs": "^3.0.7",
