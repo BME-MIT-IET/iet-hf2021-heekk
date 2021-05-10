@@ -1,6 +1,9 @@
 .scannerwork
 .idea
+.scannerwork
 .project
 debug.js
 node_modules/
 package-lock.json
+.nyc_output/
+coverage/

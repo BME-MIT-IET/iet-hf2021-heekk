@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo tests</title>
+</head>
+<body>
+	<label for="keyInput">Key: <label>
+    <input type="text" id="keyInput">
+	
+	<label for="valueInput">Value: <label>
+    <input type="text" id="valueInput">
+    <button onclick="addParam()">Add new parameter</button>
+    <button onclick="clearParams()">Clear</button>
+	<br>
+	<br>
+	<label for="portInput">Port: <label>
+    <input type="text" id="portInput">
+    <button onclick="changePort()">Change port!</button>
+
+	<br>
+	<br>
+	<button onclick="countParams()">How many params are there? </button>
+	<label id="countLabel"></label>
+	
+    <script src="../url.min.js"></script>
+    <script src="./main4.js"></script>
+</body>
+</html>
