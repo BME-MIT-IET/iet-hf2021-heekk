@@ -21,7 +21,7 @@
   "main": "url.min.js",
   "scripts": {
     "minify": "./node_modules/uglify-js/bin/uglifyjs url.js --output url.min.js --compress --mangle",
-    "bdd_test": "cucumber-js --publish"
+    "bdd_test": "cucumber-js --publish",
     "test": "mocha ./test --recursive",
     "test-original": "mocha ./test/url.js",
     "coverage-original": "nyc npm run test-original",
