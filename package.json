@@ -20,8 +20,12 @@
   },
   "main": "url.min.js",
   "scripts": {
-    "test": "mocha ./test/url.js",
-    "minify": "./node_modules/uglify-js/bin/uglifyjs url.js --output url.min.js --compress --mangle"
+    "test": "mocha ./test --recursive",
+    "test-original": "mocha ./test/url.js --recursive",
+    "coverage-original": "nyc npm run test-original",
+    "minify": "./node_modules/uglify-js/bin/uglifyjs url.js --output url.min.js --compress --mangle",
+    "coverage": "nyc npm run test",
+    "report": "nyc report --reporter=lcov --reporter=html"
   },
   "maintainers": [
     {
@@ -39,9 +43,12 @@
   },
   "github": "https://github.com/Mikhus/domurl",
   "devDependencies": {
+    "chai": "^4.3.4",
+    "istanbul": "^0.4.5",
     "jscs": "^3.0.7",
     "jshint": "^2.11.0",
     "mocha": "^7.1.1",
+    "nyc": "^15.1.0",
     "uglify-js": "^3.8.1"
   }
 }
