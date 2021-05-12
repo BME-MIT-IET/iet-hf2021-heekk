@@ -1,0 +1,4 @@
+# Ignore all markdown files:
+*.md
+# Ignore all min.js files:
+*.min.js
