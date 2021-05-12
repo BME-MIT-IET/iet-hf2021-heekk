@@ -62,3 +62,21 @@ Tömb típusú query paraméter kezelésének ellenőrzése.
 A query paraméterek számának, illetve az üresség helyes megállapításának tesztelése.
 
 ![](../img/chrome_test/14.png)
+
+## A demo mappában lévő tesztek kipróbálása
+
+Index1.html, query paraméter hozzáadása:
+
+![](../img/chrome_test/15.png)
+
+Index3.html, az útvonal elemeinek azonosítása:
+
+![](../img/chrome_test/16.png)
+
+Index4.html, a query paraméterek megszámolása:
+
+![](../img/chrome_test/17.png)
+
+
+
+Minden teszt sikeresen lefutott és az elvárt viselkedést hozta.
