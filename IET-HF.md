@@ -37,5 +37,5 @@ A protocol, port, path, host, hash és a query paraméterek módosításának é
 
 Tesztelés friss böngésző verziókban: 
 - Chrome: 90.0.4430.93, 
-- Edge, 
+- Edge: 90.0.818.56, 
 - Safari.
