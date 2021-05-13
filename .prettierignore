@@ -2,3 +2,5 @@
 *.md
 # Ignore all min.js files:
 *.min.js
+# Ignore all files in the demo folder:
+demo
