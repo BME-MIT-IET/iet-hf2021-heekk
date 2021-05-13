@@ -41,4 +41,3 @@ Tesztelés friss böngésző verziókban:
 - Safari: 13.1.2 (15609.3.5.1.3),
 - FireFox: 88.0.1,
 - Opera: 76.0.4017.123.
-- Safari: 13.1.2
