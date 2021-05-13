@@ -37,3 +37,25 @@ Az útvonal enkódolása:
 ![](../img/opera_test/9.png)
 
 A tesztek sikeresen lefutottak.
+
+## Manuális tesztelés
+
+Az útvonal meghatározása, query paraméterek hozzáadása:
+
+![](../img/opera_test/10.png)
+
+Útvonal egyszerűsítés:
+
+![](../img/opera_test/11.png)
+
+Tömb típusú query paraméter kezelése:
+
+![](../img/opera_test/12.png)
+
+Összes paraméter törlése:
+
+![](../img/opera_test/13.png)
+
+A query paraméterek száma, üres query:
+
+![](../img/opera_test/14.png)
