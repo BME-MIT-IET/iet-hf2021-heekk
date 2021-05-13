@@ -40,9 +40,3 @@ hashButton.addEventListener('click', () => {
     
     location.href = url;
 });
-
-
-// u.protocol
-// u.user
-// u.pass
-// u.host
