@@ -45,39 +45,6 @@ Végül egyetlen TODO komment maradt egy nagyobb issue-ra hivatkozva, a többi h
 
 ![](img/analysis/sonarqube_result.png)
 
-## GitHub Prettier Action
-
-A kódformázás ellenőrzésének automatizálásához a GitHub Prettier Action-t választottuk.
-
-Először bekonfiguráltuk a Prettier-t a .yaml file-ban. Több kevésbé szerencsés próbálkozás után a követező kapcsolókat használtuk:
-
-![](img/analysis/prettier.png)
-
-    - only_changed: True - Csak a megváltozott fájlokra fusson le az ellenőrzés.
-    - dry: True - Nem javítja ki a formázási hibákat, csak fail-el az action, ha rosszul formázott fájlt talál.
-
-Létrehoztunk egy .prettierignore file-t is, mert nem akartuk, hogy a dokumentációnkra és a minified js-re is lefusson az ellenőrzés. Ennek érdekében megjelöltük ezt a két fájltípust a prittierignore-ban:
-
-![](img/analysis/prettierignore.png)
-
-Végül a .prettierrc fájlban megfogalmaztuk, milyen szabályokat szeretnénk a fájlok formázásánál kikényszeríteni.
-
-![](img/analysis/prettierrc.png)
-
-Először a --write kapcsolóval konfiguráltuk be, az only_changed és a dry kapcsolók használata nélkül (ezek default értéke False), így minden fájlt átformázott a Prettier. Így láthattuk, hogyan működik, de végül úgy döntöttünk, hogy ezen a branch-en nem dolgozunk tovább (tech/analysis), hogy ne okozzon fennakadást a sok merge conflict, a megfelelő beállításokkel egy új branch-on (prettier) újból elvégeztük a konfigurációt.
-
-A sikeres automatizált formázás a GitHub Actions felületén:
-
-![](img/analysis/prettier_result.png)
-
-A módosított fájloknál commit message-ben jelzi a Prettier, hogy megjavította a kód formázását ("Prettified Code!"):
-
-![](img/analysis/prettified.png)
-
-Miután átkonfiguráltuk, hogy ne módosítsa a fájlokat, csak jelezze a rosszul formázott fájlokat, a GitHub Actions felületén így néz ki egy futás, amely rosszul formázott fájlokat talál:
-
-![](img/analysis/unprettie.png)
-
 ### Manuális kód átvizsgálás
 
 Ennek a feladatnak az elvégzéséhez készítettünk egy strukturált ellenőrző listát.
@@ -88,67 +55,102 @@ Ennek a feladatnak az elvégzéséhez készítettünk egy strukturált ellenőrz
 
   - Readability:
 
-    - Code should be self-explanatory. Get a feel of story reading, while going through the code. - Am I able to understand the code easily?
-    - Use appropriate name for variables, functions and classes.
+    - **Code should be self-explanatory. Get a feel of story reading, while going through the code - Am I able to understand the code easily?**
+
+      Nem túl könnyen emészthető a kód, véleményem szerint lehetne javítani az olvashatóságon.
+
+    - **Use appropriate name for variables, functions and classes.**
+
+      Nem mindig használ kifejező változóneveket, sok az 1-2 betűs változónév.
+
+    Például az alábbi kód kommentek, bármilyen magyarázat és rövid, beszélő változónevek hiányában nehezen érthető:
+
+    ![](img/analysis/manual/1.png)
+    ![](img/analysis/manual/5.png)
 
   - Testability:
 
-    - The code should be easy to test. - Can I unit test / debug the code easily to find the root cause?
-    - Refactor into a separate function (if required).
-    - Use interfaces while talking to other layers, as interfaces can be mocked easily
-    - Try to avoid
-      - static functions,
-      - singleton classes as these are not easily testable by mocks.
+    - **The code should be easy to test. - Can I unit test / debug the code easily to find the root cause?**
+
+      A tesztelést végző csapattagok szerint nehéz volt a kódot tesztelni a fentebb is említett okok (magyarázat hiánya, nem kifejező változónevek).
+
+    - **Refactor into a separate function (if required)**
+
+      Vannak elég hosszú függvények, ezeket érdemes lett volna több függvényre felbontani.
+
+    - **Try to avoid static functions**
+
+      Nincsenek static függvények a kódban.
 
   - Debuggability:
 
-    - Provide support to log
-      - the flow of control,
-      - parameter data
-      - and exception details to find the root cause easily.
-      - If you are using Log4Net like component then add support for database logging also, as querying the log table is easy.
+    - **Provide support to log the flow of control, parameter data and exception details to find the root cause easily.**
 
-  - Configurability: Keep the configurable values in place (XML file, database table) so that no code changes are required, if the data is changed frequently.
+      A kód nem log-ol semmit, nincs jele annak, hogy törekedtek a hibakeresés megkönnyítésére.
+
+  - **Configurability: Keep the configurable values in place (XML file, database table) so that no code changes are required, if the data is changed frequently.**
+
+    A projekt nem használ konfigurációs jellegű adatokat.
 
   - Coding best practices
 
-    - No hard coding, use constants/configuration values.
-    - Group similar values under an enumeration (enum).
-    - Comments – Do not write comments for what you are doing, instead write comments on why you are doing. Specify about any hacks, workaround and temporary fixes. Additionally, mention pending tasks in your to-do comments, which can be tracked easily.
-    - Avoid multiple if/else blocks.
+    - **No hard coding, use constants/configuration values.**
 
-  - Extensibility – Easy to add enhancements with minimal changes to the existing code. One component should be easily replaceable by a better component.
+      A kód tartalmaz beégetett konstansokat (pl. hexadecimális értékek a dekódolást végző függvényben). Például a következő kódrészletben a pirossal aláhúzott konstans érték háromszor is szerepel:
 
-  - Usability – Put yourself in the shoes of a end-user and ascertain, if the user interface/API is easy to understand and use.
+      ![](img/analysis/manual/2.png)
+
+    - **Group similar values under an enumeration (enum).**
+
+      A használt nyelvben nincsenek enumok, nincs olyan része a kódnak, ami megsérti ezt a szabályt, nem fordulnak elő olyan értékek a projektben, ahol érdemes lenne eunomkhoz hasonló struktúrát kialakítani.
+
+    - **Comments – Do not write comments for what you are doing, instead write comments on why you are doing**.
+
+      Kevés komment van a kódban, így az nehezen érthető. Viszont ahol vannak kommentek, azok jól követik a fenti szabályt - azt írják le, miért ezt a megoldást használták. Pl.:
+
+      ![](img/analysis/manual/3.png)
+      ![](img/analysis/manual/4.png)
+
+    - **Avoid multiple if/else blocks**
+
+      Nincsenek súlyosan hosszú if/else blokkok (maximum 2 else).
+
+  - **Extensibility – Easy to add enhancements with minimal changes to the existing code. One component should be easily replaceable by a better component.**
+
+    A projektnek nincs sok komponense. A parse-olást, kódolást, dekódolást végző függvények egységbezártak, könnyen cserélhetők.
+
+  - **Usability – Put yourself in the shoes of a end-user and ascertain, if the user interface/API is easy to understand and use.**
+
+    Egyszerű a library használata, nem kell sok időt fordítani a használat mikéntjének megértésére.
 
 - Biztonság, sebezhetőség
 
-  - Authentication
-  - authorization
-  - input data validation against security threats
-    - such as SQL injections
-    - and Cross Site Scripting (XSS)
-  - encrypting the sensitive data (passwords, credit card information etc.)
+  Nem fontos szempont ennél a projektnél.
 
 - Teljesítmény
 
-  - Reliability – Exception handling and cleanup (dispose) resources.
-  - Use a data type that best suits the needs such as StringBuilder, generic collection classes.
-  - Lazy loading, asynchronous and parallel processing.
-  - Caching and session/application data.
+  - **Reliability – Exception handling and cleanup (dispose) resources.**
+
+    Nincs kivételkezelés a kódban.
+
+  - **Use a data type that best suits the needs such as StringBuilder, generic collection classes.**
+
+    Dinamikusan típusos nyelv lévén ezt nehéz megítélni.
+
+  - **Lazy loading, asynchronous and parallel processing.**
+
+    A projektre nézve nem releváns szempont.
+
+  - **Caching and session/application data.**
+
+    A projektre nézve nem releváns szempont.
 
 - Bevett programozási minták, gyakorlatok
 
-  - DRY (Do not Repeat Yourself) principle: The same code should not be repeated more than twice. - Is the same code duplicated more than twice?
-  - Is this function or class too big? If yes, is the function or class having too many responsibilities?
-  - The code should follow the defined architecture.
-    - Separation of Concerns followed
-      - Split into multiple layers and tiers as per requirements (Presentation, Business and Data layers).
-      - Split into respective files (HTML, JavaScript and CSS).
-    - Code is in sync with existing code patterns/technologies.
-  - Object-Oriented Analysis and Design (OOAD) Principles
-    - Single Responsibility Principle (SRS): Do not place more than one responsibility into a single class or function, refactor into separate classes and functions.
-    - Open Closed Principle: While adding new functionality, existing code should not be modified. New functionality should be written in new classes and functions.
-    - Liskov substitutability principle: The child class should not change the behavior (meaning) of the parent class. The child class can be used as a substitute for a base class.
-    - Interface segregation: Do not create lengthy interfaces, instead split them into smaller interfaces based on the functionality. The interface should not contain any dependencies (parameters), which are not required for the expected functionality.
-    - Dependency Injection: Do not hardcode the dependencies, instead inject them.
+  - **DRY (Do not Repeat Yourself) principle: The same code should not be repeated more than twice. - Is the same code duplicated more than twice?**
+
+    Teljesül.
+
+  - **Is this function or class too big? If yes, is the function or class having too many responsibilities?**
+
+    A projekt lényegében egyetlen fájlból áll, érdemes lenne kisebb részekre bontani, illetve a hosszabb függvényeket is.
