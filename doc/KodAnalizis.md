@@ -45,11 +45,42 @@ Végül egyetlen TODO komment maradt egy nagyobb issue-ra hivatkozva, a többi h
 
 ![](img/analysis/sonarqube_result.png)
 
-### Manuális kód átvizsgálás
+## GitHub Prettier Action
+
+A kódformázás ellenőrzésének automatizálásához a GitHub Prettier Action-t választottuk.
+
+Először bekonfiguráltuk a Prettier-t a .yaml file-ban. Több kevésbé szerencsés próbálkozás után a követező kapcsolókat használtuk:
+
+![](img/analysis/prettier.png)
+
+    - only_changed: True - Csak a megváltozott fájlokra fusson le az ellenőrzés.
+    - dry: True - Nem javítja ki a formázási hibákat, csak fail-el az action, ha rosszul formázott fájlt talál.
+
+Létrehoztunk egy .prettierignore file-t is, mert nem akartuk, hogy a dokumentációnkra és a minified js-re is lefusson az ellenőrzés. Ennek érdekében megjelöltük ezt a két fájltípust a prittierignore-ban:
+
+![](img/analysis/prettierignore.png)
+
+Végül a .prettierrc fájlban megfogalmaztuk, milyen szabályokat szeretnénk a fájlok formázásánál kikényszeríteni.
+
+![](img/analysis/prettierrc.png)
+
+Először a --write kapcsolóval konfiguráltuk be, az only_changed és a dry kapcsolók használata nélkül (ezek default értéke False), így minden fájlt átformázott a Prettier. Így láthattuk, hogyan működik, de végül úgy döntöttünk, hogy ezen a branch-en nem dolgozunk tovább (tech/analysis), hogy ne okozzon fennakadást a sok merge conflict, a megfelelő beállításokkel egy új branch-on (prettier) újból elvégeztük a konfigurációt.
+
+A sikeres automatizált formázás a GitHub Actions felületén:
+
+![](img/analysis/prettier_result.png)
+
+A módosított fájloknál commit message-ben jelzi a Prettier, hogy megjavította a kód formázását ("Prettified Code!"):
+
+![](img/analysis/prettified.png)
+
+Miután átkonfiguráltuk, hogy ne módosítsa a fájlokat, csak jelezze a rosszul formázott fájlokat, a GitHub Actions felületén így néz ki egy futás, amely rosszul formázott fájlokat talál:
+
+![](img/analysis/unprettie.png)
+
+## Manuális kód átvizsgálás
 
 Ennek a feladatnak az elvégzéséhez készítettünk egy strukturált ellenőrző listát.
-
-#### Strukturált ellenőrző lista
 
 - Kód olvashatósága, karbantarthatósága
 
