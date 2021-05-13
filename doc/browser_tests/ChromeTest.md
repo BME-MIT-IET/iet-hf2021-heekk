@@ -65,9 +65,9 @@ A query paraméterek számának, illetve az üresség helyes megállapításána
 
 ## A demo mappában lévő tesztek kipróbálása
 
-Index1.html, query paraméter hozzáadása: 
+Index1.html, query paraméter hozzáadása:
 
-![](../img/chrome_test/15.png)
+![](../img/chrome_test/15_.png)
 
 Index3.html, az útvonal elemeinek azonosítása:
 
