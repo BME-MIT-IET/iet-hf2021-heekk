@@ -51,32 +51,32 @@ A kódformázás ellenőrzésének automatizálásához a GitHub Prettier Action
 
 Először bekonfiguráltuk a Prettier-t a .yaml file-ban. Több kevésbé szerencsés próbálkozás után a követező kapcsolókat használtuk:
 
-![](img/analysis/prettier.png)
+![](img/analysis/prettier.PNG)
 
     - only_changed: True - Csak a megváltozott fájlokra fusson le az ellenőrzés.
     - dry: True - Nem javítja ki a formázási hibákat, csak fail-el az action, ha rosszul formázott fájlt talál.
 
 Létrehoztunk egy .prettierignore file-t is, mert nem akartuk, hogy a dokumentációnkra és a minified js-re is lefusson az ellenőrzés. Ennek érdekében megjelöltük ezt a két fájltípust a prittierignore-ban:
 
-![](img/analysis/prettierignore.png)
+![](img/analysis/prettierignore.PNG)
 
 Végül a .prettierrc fájlban megfogalmaztuk, milyen szabályokat szeretnénk a fájlok formázásánál kikényszeríteni.
 
-![](img/analysis/prettierrc.png)
+![](img/analysis/prettierrc.PNG)
 
 Először a --write kapcsolóval konfiguráltuk be, az only_changed és a dry kapcsolók használata nélkül (ezek default értéke False), így minden fájlt átformázott a Prettier. Így láthattuk, hogyan működik, de végül úgy döntöttünk, hogy ezen a branch-en nem dolgozunk tovább (tech/analysis), hogy ne okozzon fennakadást a sok merge conflict, a megfelelő beállításokkel egy új branch-on (prettier) újból elvégeztük a konfigurációt.
 
 A sikeres automatizált formázás a GitHub Actions felületén:
 
-![](img/analysis/prettier_result.png)
+![](img/analysis/prettier_result.PNG)
 
 A módosított fájloknál commit message-ben jelzi a Prettier, hogy megjavította a kód formázását ("Prettified Code!"):
 
-![](img/analysis/prettified.png)
+![](img/analysis/prettified.PNG)
 
 Miután átkonfiguráltuk, hogy ne módosítsa a fájlokat, csak jelezze a rosszul formázott fájlokat, a GitHub Actions felületén így néz ki egy futás, amely rosszul formázott fájlokat talál:
 
-![](img/analysis/unprettie.png)
+![](img/analysis/unprettie.PNG)
 
 ## Manuális kód átvizsgálás
 
@@ -96,8 +96,8 @@ Ennek a feladatnak az elvégzéséhez készítettünk egy strukturált ellenőrz
 
     Például az alábbi kód kommentek, bármilyen magyarázat és rövid, beszélő változónevek hiányában nehezen érthető:
 
-    ![](img/analysis/manual/1.png)
-    ![](img/analysis/manual/5.png)
+    ![](img/analysis/manual/1.PNG)
+    ![](img/analysis/manual/5.PNG)
 
   - Testability:
 
@@ -129,7 +129,7 @@ Ennek a feladatnak az elvégzéséhez készítettünk egy strukturált ellenőrz
 
       A kód tartalmaz beégetett konstansokat (pl. hexadecimális értékek a dekódolást végző függvényben). Például a következő kódrészletben a pirossal aláhúzott konstans érték háromszor is szerepel:
 
-      ![](img/analysis/manual/2.png)
+      ![](img/analysis/manual/2.PNG)
 
     - **Group similar values under an enumeration (enum).**
 
@@ -139,8 +139,8 @@ Ennek a feladatnak az elvégzéséhez készítettünk egy strukturált ellenőrz
 
       Kevés komment van a kódban, így az nehezen érthető. Viszont ahol vannak kommentek, azok jól követik a fenti szabályt - azt írják le, miért ezt a megoldást használták. Pl.:
 
-      ![](img/analysis/manual/3.png)
-      ![](img/analysis/manual/4.png)
+      ![](img/analysis/manual/3.PNG)
+      ![](img/analysis/manual/4.PNG)
 
     - **Avoid multiple if/else blocks**
 
