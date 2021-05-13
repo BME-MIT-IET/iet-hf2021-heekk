@@ -30,4 +30,15 @@ Istanbul code coverage
 
 ### BDD tesztek
 
+Cucumber keretrendszer használatával BDD tesztek készítése.
+A protocol, port, path, host, hash és a query paraméterek módosításának és helyes enkódolásának/dekódolásának tesztelése.
+
 ### Manuális tesztek
+
+Tesztelés friss böngésző verziókban: 
+- Chrome: 90.0.4430.93, 
+- Edge: 90.0.818.56, 
+- Safari: 13.1.2 (15609.3.5.1.3),
+- FireFox: 88.0.1,
+- Opera: 76.0.4017.123.
+- Safari: 13.1.2
