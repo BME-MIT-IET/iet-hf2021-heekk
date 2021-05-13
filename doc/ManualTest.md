@@ -1,5 +1,13 @@
 ### Manuális tesztek
 
+Eredetileg tesztelve az alábbi böngészőkben volt:
+- IE 7+
+- Chrome 25+
+- Opera 12.15+
+- Firefox 20+
+- Android browser 2.3+
+- NodeJS 0.10+
+
 Tesztelés a következő friss böngésző verziókban történt: 
 
 - Chrome: 90.0.4430.93, 
