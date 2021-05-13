@@ -1,0 +1,8 @@
+# Ignore all markdown files:
+*.md
+# Ignore all min.js files:
+*.min.js
+# Ignore all files in the demo folder:
+demo
+# Ignore all files in the test folder:
+test
